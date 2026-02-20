@@ -1,0 +1,6 @@
+Gameinfo
+{
+    AddEventHandlers = "LPT_BackpackHandler"
+    AddEventHandlers = "LPT_UaS_AmmoPouchHandler"
+    AddEventHandlers = "LPT_UaS_AssaultPackHandler"
+}

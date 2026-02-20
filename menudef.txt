@@ -1,0 +1,14 @@
+AddOptionMenu "OptionsMenu"
+{
+    Submenu "Lemon's Pack Track", "LPT_MenuMain"
+}
+
+OptionMenu "LPT_MenuMain"
+{
+    Title "Lemon's Pack Track"
+    Slider "Scale", "LPT_Scale", 0.1, 2.0, 0.1, 1
+    StaticText ""
+    Option "Scale with Map Zoom", "LPT_ScaleWithZoom", "Boolean"
+    Option "Show Other Player Packs", "LPT_ShowOtherPlayerPacks", "Boolean"
+    Option "Show Empty Packs", "LPT_ShowEmptyPacks", "Boolean"
+}

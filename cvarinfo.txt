@@ -1,0 +1,4 @@
+nosave user float LPT_Scale = 1.0;
+nosave user bool LPT_ScaleWithZoom = true;
+nosave user bool LPT_ShowOtherPlayerPacks = true;
+nosave user bool LPT_ShowEmptyPacks = false;
