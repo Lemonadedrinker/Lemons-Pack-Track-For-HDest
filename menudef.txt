@@ -11,4 +11,6 @@ OptionMenu "LPT_MenuMain"
     Option "Scale with Map Zoom", "LPT_ScaleWithZoom", "Boolean"
     Option "Show Other Player Packs", "LPT_ShowOtherPlayerPacks", "Boolean"
     Option "Show Empty Packs", "LPT_ShowEmptyPacks", "Boolean"
+    StaticText ""
+    SafeCommand "Uninstall Mod", "netevent LPT_Uninstall", "Are you sure? A map change will restart the mod."
 }
