@@ -8,10 +8,15 @@ class LPT_BackpackHandler : EventHandler
 
     bool uninstallingMod;
 
-    override void WorldLoaded(WorldEvent event)
+    override void OnRegister()
     {
         backpackClassName = "HDBackpack";
         markerClassName = "LPT_BackpackMarker";
+    }
+
+    override void WorldLoaded(WorldEvent event)
+    {
+        ResetMarkers();
     }
 
     // Used to uninstall the mod
@@ -41,7 +46,7 @@ class LPT_BackpackHandler : EventHandler
     {
         // Only runs for backpacks
         //Console.printf(event.Thing.GetClassName());
-        if (event.Thing.GetClassName() != backpackClassName) return;
+        if (event.Thing == Null || event.Thing.GetClassName() != backpackClassName) return;
 
         // Spawn in the marker
         LPT_BackpackMarker marker = SpawnMarker(HDBackpack(event.Thing));
