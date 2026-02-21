@@ -6,10 +6,34 @@ class LPT_BackpackHandler : EventHandler
     String backpackClassName; // For inheritance
     String markerClassName; // For inheritance
 
+    bool uninstallingMod;
+
     override void WorldLoaded(WorldEvent event)
     {
         backpackClassName = "HDBackpack";
         markerClassName = "LPT_BackpackMarker";
+    }
+
+    // Used to uninstall the mod
+    override void NetworkProcess(ConsoleEvent event)
+    {
+        if(players[Consoleplayer].mo == null) return;
+
+        // Uninstall the mod by deleting the event handler, only if it is the arbitrator
+        else if (event.Name == "LPT_Uninstall")
+        {
+            //Console.printf("Trying to uninstall mod");
+            //Console.printf("Player number: %i", event.Player);
+            if (net_arbitrator == event.Player)
+            {
+                if (backpackClassName == "HDBackpack") Console.printf("Uninstalling mod. Have a good day!");
+                uninstallingMod = true;
+            }
+            else
+            {
+                if (backpackClassName == "HDBackpack") Console.printf("Not uninstalling mod. You must be the arbitrator!");
+            }
+        }
     }
 
     // Spawn and store the backpacks with their markers
@@ -29,6 +53,23 @@ class LPT_BackpackHandler : EventHandler
 
     override void WorldTick()
     {
+        // Delete the event handler if the mod is being uninstalled
+        if (uninstallingMod)
+        {
+            for (int i = 0; i < markers.Size(); i++)
+            {
+                markers[i].Destroy();
+            }
+
+            if (!bDESTROYED)
+            {
+                Destroy();
+            }
+            return;
+        }
+
+        // Check if any of the previously existing backpacks have been deleted
+        // If so, restore both arrays
         for (int i = 0; i < backpacks.Size(); i++)
         {
             if (backpacks[i] == Null)
