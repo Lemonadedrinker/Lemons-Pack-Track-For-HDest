@@ -4,6 +4,7 @@ class LPT_BackpackHandler : EventHandler
     Array<LPT_BackpackMarker> markers;
 
     String backpackClassName; // For inheritance
+    String wimpClassName; // For inheritance and WIMP (what's in my pack) compatibility
     String markerClassName; // For inheritance
 
     bool uninstallingMod;
@@ -12,6 +13,7 @@ class LPT_BackpackHandler : EventHandler
     {
         backpackClassName = "HDBackpack";
         markerClassName = "LPT_BackpackMarker";
+        wimpClassName = "WIMPHDBackpack";
     }
 
     override void WorldLoaded(WorldEvent event)
@@ -44,9 +46,9 @@ class LPT_BackpackHandler : EventHandler
     // Spawn and store the backpacks with their markers
     override void WorldThingSpawned(WorldEvent event)
     {
-        // Only runs for backpacks
+        // Only runs for backpacks OR wimp backpacks (for compatibility)
         //Console.printf(event.Thing.GetClassName());
-        if (event.Thing == Null || event.Thing.GetClassName() != backpackClassName) return;
+        if (event.Thing == Null || (event.Thing.GetClassName() != backpackClassName && event.Thing.GetClassName() != wimpClassName)) return;
 
         // Spawn in the marker
         LPT_BackpackMarker marker = SpawnMarker(HDBackpack(event.Thing));
